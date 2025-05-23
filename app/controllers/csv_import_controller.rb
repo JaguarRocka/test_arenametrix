@@ -6,10 +6,10 @@ class CsvImportController < ApplicationController
     begin
       csv_imported = SmarterCSV.process(params[:file])
       csv_imported.each do |row|
-        seller = Seller.find_or_create_by(name: row[:filiere_de_vente])
-        event = Event.find_or_create_by(name: row[:spectacle])
-        customer = Customer.find_or_create_by(email: row[:email]) do |c|
-          c.first_name = row[:prenom].
+        seller = Seller.find_or_create_by(name: row[:filiere_de_vente].capitalize)
+        event = Event.find_or_create_by(name: row[:spectacle].capitalize)
+        customer = Customer.find_or_create_by(email: row[:email].downcase) do |c|
+          c.first_name = row[:prenom]
           c.last_name = row[:nom]
           c.address = row[:adresse]
           c.postal_code = row[:code_postal]
@@ -43,7 +43,7 @@ class CsvImportController < ApplicationController
       redirect_to dashboard_path
     rescue StandardError => e
       flash[:error] = "Erreur lors de l'importation du fichier CSV : #{e.message}"
-      redirect_to upload_csv_import_path and return
+      redirect_to root_path and return
     end
   end
 end
