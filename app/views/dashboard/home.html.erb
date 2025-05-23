@@ -1,0 +1,24 @@
+<h1>Home</h1>
+
+<%= link_to "Import new CSV", root_path %>
+
+<%= turbo_frame_tag "global_values" do %>
+  <h1><%= @total_reservations %> réservations</h1>
+  <h1><%= @total_users %> clients</h1>
+  <h1><%= @average_age %> ans de moyenne</h1>
+  <h1>Prix moyen: <%= @average_price %>€</h1>
+<% end %>
+
+
+<%= form_with url: event_value_path, method: :get, data: { turbo_frame: "event_results" } do |form| %>
+  <div>
+    <%= form.label :event_id, "Choisir un spectacle" %><br>
+    <%= form.collection_select :event_id, Event.all, :id, :name, prompt: "Sélectionner..." %>
+  </div>
+  <div>
+    <%= form.submit "Voir" %>
+  </div>
+<% end %>
+
+<%= turbo_frame_tag "event_results" do %>
+<% end %>

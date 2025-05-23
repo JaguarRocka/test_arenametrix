@@ -1,0 +1,9 @@
+<%= turbo_frame_tag "event_results" do %>
+  <div class="event-details">
+    <h3><%= event.name %></h3>
+    <h3><%= data[:total_reservations] %> réservation</h3>
+    <h3><%= data[:total_customers] %> client(s)</h3>
+    <h3><%= data[:average_age] %> ans de moyenne</h3>
+    <h3><%= data[:average_price] %> € de moyenne</h3>
+  </div>
+<% end %>
