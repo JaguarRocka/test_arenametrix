@@ -4,5 +4,5 @@ class Representation < ApplicationRecord
   has_many :tickets, through: :reservations
   has_many :customers, through: :reservations
 
-  validates :starts_at, :ends_at, :date, presence: true
+  validates :start_at, :end_at, :date, presence: true
 end
