@@ -6,7 +6,7 @@ class Ticket < ApplicationRecord
   has_one :event, through: :representation
   has_one :seller, through: :reservation
 
-  validates :number, presence: true
+  validates :ticket_number, presence: true
   validates :price, presence: true
   validates :category, presence: true
 end

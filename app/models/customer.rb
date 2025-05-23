@@ -5,9 +5,9 @@ class Customer < ApplicationRecord
   has_many :events, through: :representations
 
   validates :first_name, :last_name, presence: true
-  validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :email, presence: true, uniqueness: true, format: { with: /\A.+@.+\..+\z/, message: "is invalid" }
   validates :age, presence: true
-  validates :gender, inclusion: { in: %w[M F] }
+
   validates :postal_code, presence: true
   validates :country, presence: true
 end
