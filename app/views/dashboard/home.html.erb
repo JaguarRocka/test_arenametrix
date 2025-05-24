@@ -1,24 +1,45 @@
-<h1>Home</h1>
-
-<%= link_to "Import new CSV", root_path %>
-
 <%= turbo_frame_tag "global_values" do %>
-  <h1><%= @total_reservations %> réservations</h1>
-  <h1><%= @total_users %> clients</h1>
-  <h1><%= @average_age %> ans de moyenne</h1>
-  <h1>Prix moyen: <%= @average_price %>€</h1>
-<% end %>
+  <div class="mb-8 p-6 bg-gray-50 border border-gray-200 rounded-lg shadow-md max-w mx-auto mt-4">
+    <h2 class="text-2xl font-extrabold text-gray-800 mb-6">Données générales</h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-10">
+      <div class="bg-blue-100 text-blue-900 rounded-xl shadow p-4">
+        <h2 class="text-lg font-semibold">Réservations</h2>
+        <p class="text-2xl"><%= @total_reservations %></p>
+      </div>
 
+      <div class="bg-green-100 text-green-900 rounded-xl shadow p-4">
+        <h2 class="text-lg font-semibold">Clients</h2>
+        <p class="text-2xl"><%= @total_users %></p>
+      </div>
 
-<%= form_with url: event_value_path, method: :get, data: { turbo_frame: "event_results" } do |form| %>
-  <div>
-    <%= form.label :event_id, "Choisir un spectacle" %><br>
-    <%= form.collection_select :event_id, Event.all, :id, :name, prompt: "Sélectionner..." %>
+      <div class="bg-yellow-100 text-yellow-900 rounded-xl shadow p-4">
+        <h2 class="text-lg font-semibold">Âge moyen</h2>
+        <p class="text-2xl"><%= @average_age %> ans</p>
+      </div>
+
+      <div class="bg-purple-100 text-purple-900 rounded-xl shadow p-4">
+        <h2 class="text-lg font-semibold">Prix moyen</h2>
+        <p class="text-2xl"><%= @average_price %>€</p>
+      </div>
+    </div>
   </div>
-  <div>
-    <%= form.submit "Voir" %>
-  </div>
 <% end %>
 
-<%= turbo_frame_tag "event_results" do %>
-<% end %>
+<div class="mb-8 p-6 bg-gray-50 border border-gray-200 rounded-lg shadow-md max-w mx-auto">
+  <h2 class="text-2xl font-extrabold text-gray-800 mb-6">Données par spectacle</h2>
+
+  <%= form_with url: event_value_path, method: :get, data: { turbo_frame: "event_results" }, class: "space-y-4" do |form| %>
+    <div>
+      <%= form.label :event_id, "Choisir un spectacle", class: "block mb-2 text-lg font-medium text-gray-800" %>
+      <%= form.collection_select :event_id, Event.all, :id, :name, { prompt: "Sélectionner..." }, { class: "bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" } %>
+    </div>
+
+    <div>
+      <%= form.submit "Voir", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full" %>
+    </div>
+  <% end %>
+
+  <%= turbo_frame_tag "event_results" do %>
+  <% end %>
+</div>

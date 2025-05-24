@@ -1,9 +1,27 @@
 <%= turbo_frame_tag "event_results" do %>
-  <div class="event-details">
-    <h3><%= event.name %></h3>
-    <h3><%= data[:total_reservations] %> réservation</h3>
-    <h3><%= data[:total_customers] %> client(s)</h3>
-    <h3><%= data[:average_age] %> ans de moyenne</h3>
-    <h3><%= data[:average_price] %> € de moyenne</h3>
+  <h4 class="text-2xl font-extrabold text-gray-800 mb-6 mt-4"><%= event.name %></h4>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-10">
+
+    <div class="bg-blue-100 text-blue-900 rounded-xl shadow p-4">
+      <h2 class="text-lg font-semibold">Réservations</h2>
+      <p class="text-2xl"><%= data[:total_reservations] %></p>
+    </div>
+
+
+    <div class="bg-green-100 text-green-900 rounded-xl shadow p-4">
+      <h2 class="text-lg font-semibold">Clients</h2>
+      <p class="text-2xl"><%= data[:total_customers] %></p>
+    </div>
+
+    <div class="bg-yellow-100 text-yellow-900 rounded-xl shadow p-4">
+      <h2 class="text-lg font-semibold">Âge moyen</h2>
+      <p class="text-2xl"><%= data[:average_age] %> ans</p>
+    </div>
+
+    <div class="bg-purple-100 text-purple-900 rounded-xl shadow p-4">
+      <h2 class="text-lg font-semibold">Prix moyen</h2>
+      <p class="text-2xl"><%= data[:average_price] %>€</p>
+    </div>
   </div>
 <% end %>
