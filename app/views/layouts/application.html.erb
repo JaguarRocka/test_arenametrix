@@ -10,9 +10,6 @@
 
     <%= yield :head %>
 
-    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
-    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
-
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
@@ -23,6 +20,38 @@
   </head>
 
   <body>
-    <%= yield %>
+    <%= render "shared/navbar" %>
+    <div class="container mx-auto">
+      <%= yield %>
+    </div>
   </body>
+
+  <div class="fixed top-4 right-4 space-y-2 z-50 max-w-xs">
+    <% flash.each do |type, message| %>
+      <div class="flash px-3 py-1 rounded text-sm font-medium shadow
+        <%= case type.to_sym
+            when :notice then "bg-blue-100 text-blue-800"
+            when :success then "bg-green-100 text-green-800"
+            when :error then "bg-red-100 text-red-800"
+            else "bg-gray-100 text-gray-800"
+          end %>">
+        <%= message %>
+      </div>
+    <% end %>
+  </div>
+
+
+  <script>
+    document.addEventListener("turbo:load", function() {
+      setTimeout(function() {
+        const flashMessages = document.querySelectorAll('.flash');
+        flashMessages.forEach(function(message) {
+          message.style.opacity = 0;
+          setTimeout(function() {
+            message.remove();
+          }, 500);
+        });
+      }, 3000); // Disparaît après 3 secondes
+    });
+  </script>
 </html>
