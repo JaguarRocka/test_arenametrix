@@ -1,7 +1,6 @@
 class DashboardController < ApplicationController
 
   def home
-    
     @total_reservations = get_total_resevations
     @total_users = get_total_customers
     @average_age = average_customers_age
@@ -42,9 +41,11 @@ class DashboardController < ApplicationController
 
   def average_customers_age
     all_ages = Customer.pluck(:age)
+    return 0 if all_ages.empty?
 
     customers_with_age = all_ages.reject{ |a| a  == 0 }
     customers_with_age.sum / customers_with_age.size
+
   end
 
   def average_customers_age_for_event(event)
@@ -60,6 +61,8 @@ class DashboardController < ApplicationController
 
   def average_tickets_price
     all_prices = Ticket.pluck(:price)
+    return 0 if all_prices.empty?
+
     (all_prices.sum / all_prices.size).round(2)
     #  ici problème car on veut le prix moyen par représentation
   end
