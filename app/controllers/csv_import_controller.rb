@@ -3,10 +3,9 @@ class CsvImportController < ApplicationController
   end
 
   def import
-    # Check if the file is present and is a CSV
     if params[:file].nil? || params[:file].content_type != "text/csv"
       flash[:error] = "Veuillez télécharger un fichier CSV valide."
-      redirect_to root_path and return 
+      redirect_to root_path and return
     else
       begin
         csv_imported = SmarterCSV.process(params[:file])
