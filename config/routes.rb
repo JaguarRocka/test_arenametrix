@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root "dashboard#home"
+  root "dashboard#dashboard"
   get 'event_value', to: 'dashboard#event_value', as: :event_value
 
   get 'import_csv', to: 'csv_import#upload', as: :upload_csv
