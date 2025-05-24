@@ -1,13 +1,18 @@
 class DashboardController < ApplicationController
-
-  def home
-    @total_reservations = get_total_resevations
-    @total_users = get_total_customers
+  def dashboard
+    @total_reservations = get_total(Reservation)
+    @total_customers = get_total(Customer)
     @average_age = average_customers_age
-    @average_price = average_tickets_price
+    @average_price = average_tickets_price_per_representation
   end
 
   def event_value
+    if params[:event_id].blank?
+      render turbo_stream: turbo_stream.update("event_results",
+        "<div class='flash text-red-700 bg-red-100 p-4 rounded'>Veuillez sélectionner un événement.</div>".html_safe)
+      return
+    end
+
     @event = Event.find(params[:event_id])
     @data_event = {
       total_reservations: get_total_reservations_for_event(@event),
@@ -23,20 +28,16 @@ class DashboardController < ApplicationController
 
   private
 
-  def get_total_resevations
-    Reservation.count # optimiser ceci
+  def get_total(model)
+    model.count
   end
 
   def get_total_reservations_for_event(event)
-    event.reservations.count
-  end
-
-  def get_total_customers
-    Customer.count # optimiser ceci
+    event.reservations.size
   end
 
   def get_total_customers_for_event(event)
-    event.customers.count
+    event.customers.size
   end
 
   def average_customers_age
@@ -59,12 +60,16 @@ class DashboardController < ApplicationController
     end
   end
 
-  def average_tickets_price
-    all_prices = Ticket.pluck(:price)
+  def average_tickets_price_per_representation
+    all_prices = []
+    representations = Representation.all
+    representations.each do |representation|
+      representation_tickets_price = representation.tickets.pluck(:price)
+      all_prices << (representation_tickets_price.sum / representation_tickets_price.size).round(2)
+    end
     return 0 if all_prices.empty?
 
     (all_prices.sum / all_prices.size).round(2)
-    #  ici problème car on veut le prix moyen par représentation
   end
 
   def average_tickets_price_for_event(event)
