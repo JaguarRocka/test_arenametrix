@@ -1,24 +1,17 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Comment lancer l'application en local ?
 
-Things you may want to cover:
+- Préparer la DB:
 
-* Ruby version
+J'ai fait le choix de créer une instance de PostgreSql avec un fichier docker-compose ().
 
-* System dependencies
+Pour le lancer : docker-compose -f docker-compose.yml up -d
 
-* Configuration
 
-* Database creation
+On fait ensuite la migration de la DB avec rails db:migrate
 
-* Database initialization
 
-* How to run the test suite
+- Lancer l'environnement :
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+On utilise la commande bin/dev
