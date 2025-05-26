@@ -1,15 +1,27 @@
 # README
 
-Comment lancer l'application en local ?
+## Comment lancer l'application en local ?
 
-- Préparer la DB:
+### 1. Préparer la base de données
 
-J'ai fait le choix de créer une instance de PostgreSql avec un fichier docker-compose ().
+J'ai fait le choix de créer une instance de **PostgreSQL** avec un fichier `docker-compose.yml`.
 
-Pour le lancer : docker-compose -f docker-compose.yml up -d
+Pour lancer la base de données, utilisez la commande suivante :
 
-On fait ensuite la migration de la DB avec rails db:migrate
+```bash
+docker-compose -f docker-compose.yml up -d
+```
 
-- Lancer l'environnement :
+On fait ensuite la migration de la DB 
 
-On utilise la commande bin/dev
+```bash
+rails db:migrate
+```
+
+### 2. Lancer l'environnement :
+
+On utilise la commande 
+
+```bash
+bin/dev
+```
