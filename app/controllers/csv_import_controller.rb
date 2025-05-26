@@ -8,7 +8,7 @@ class CsvImportController < ApplicationController
       redirect_to upload_csv_path and return
     else
       begin
-        csv_imported = SmarterCSV.process(params[:file])
+        csv_imported = SmarterCSV.process(params[:file], batch_size: 100)
         csv_imported.each do |row|
           seller = Seller.find_or_create_by(name: row[:filiere_de_vente].to_s.capitalize)
           event = Event.find_or_create_by(name: row[:spectacle].to_s.capitalize)
