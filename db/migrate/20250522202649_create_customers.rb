@@ -7,7 +7,7 @@ class CreateCustomers < ActiveRecord::Migration[8.0]
       t.text :address
       t.string :postal_code, null: false
       t.string :country, null: false
-      t.integer :age, null: false
+      t.integer :age
       t.string :gender, limit: 1
       t.timestamps
     end
