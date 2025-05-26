@@ -5,5 +5,4 @@ class Reservation < ApplicationRecord
   has_many :tickets, dependent: :destroy
 
   has_one :event, through: :representation
-
 end

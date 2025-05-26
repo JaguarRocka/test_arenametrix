@@ -64,9 +64,11 @@ class DashboardController < ApplicationController
     all_prices = []
     representations = Representation.all
     representations.each do |representation|
-      representation_tickets_price = representation.tickets.pluck(:price)
-      all_prices << (representation_tickets_price.sum / representation_tickets_price.size).round(2)
+      prices = representation.tickets.pluck(:price)
+      next if prices.empty?
+      all_prices << (prices.sum / prices.size).round(2)
     end
+
     return 0 if all_prices.empty?
 
     (all_prices.sum / all_prices.size).round(2)
