@@ -53,7 +53,7 @@ L'application comporte deux pages :
   
 
 ## Logique derrière l'import des CSV 
-Pour traiter les CSV, nous avons fait le choix d'utiliser la gem SmarterCSV. Elle rend la manipulation plus simple que le module CSV de Rails, notamment en transformant le CSV en array de hashs sur lequel on itère facilement. Elle permet également, pour les gros fichiers d'utiliser des batchs pour limiter l'utilisation de la mémoire (ici j'ai mis un timie 100).
+Pour traiter les CSV, nous avons fait le choix d'utiliser la gem SmarterCSV. Elle rend la manipulation plus simple que le module CSV de Rails, notamment en transformant le CSV en array de hashs sur lequel on itère facilement. Elle permet également, pour les gros fichiers d'utiliser des batchs pour limiter l'utilisation de la mémoire (ici j'ai mis un timide 100).
 
 
 ### 3. Lancer les tests: 
