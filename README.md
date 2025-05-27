@@ -12,6 +12,12 @@ Pour lancer la base de données, utilisez la commande suivante :
 docker-compose -f docker-compose.yml up -d
 ```
 
+Pour l'arrêter : 
+
+```bash
+docker-compose -f docker-compose.yml down
+```
+
 On crée les secrets 
 
 ```bash
