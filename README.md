@@ -6,6 +6,15 @@
 
 J'ai fait le choix de créer une instance de **PostgreSQL** avec un fichier `docker-compose.yml`.
 
+On commence par créer les secrets 
+
+```bash
+touch .env
+echo "POSTGRES_USER=arena" >> .env
+echo "POSTGRES_PASSWORD=metrix" >> .env
+echo "POSTGRES_DB=test_arenametrix_development" >> .env
+```
+
 Pour lancer la base de données, utilisez la commande suivante :
 
 ```bash
@@ -16,15 +25,6 @@ Pour l'arrêter :
 
 ```bash
 docker-compose -f docker-compose.yml down
-```
-
-On crée les secrets 
-
-```bash
-touch .env
-echo "POSTGRES_USER=arena" >> .env
-echo "POSTGRES_PASSWORD=metrix" >> .env
-echo "POSTGRES_DB=test_arenametrix_development" >> .env
 ```
 
 On fait ensuite la migration de la DB 
