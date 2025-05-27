@@ -56,3 +56,8 @@ Pour traiter les CSV, nous avons fait le choix d'utiliser la gem SmarterCSV. Ell
 ```bash
 bin/rails test
 ```
+
+### 4. Schéma de BDD 
+
+<img width="813" alt="image" src="https://github.com/user-attachments/assets/bfa92a9e-6bc9-405c-bf49-81dc09dd37e6" />
+
